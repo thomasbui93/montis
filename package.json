@@ -2,8 +2,12 @@
   "name": "montis",
   "version": "0.0.1",
   "description": "Backend for August application",
-  "main": "index.js",
+  "main": "./server/index.js",
   "scripts": {
+    "start": "nodemon ./node_modules/.bin/babel-node ./server/index",
+    "clean": "rm -rf build",
+    "transform": "babel -d ./build ./server",
+    "production": "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,10 +20,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5",
+    "normalize-port": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "node-babel": "^0.1.2"
+    "babel-preset-es2015": "^6.24.1",
+    "node-babel": "^0.1.2",
+    "nodemon": "^1.11.0"
   }
 }
