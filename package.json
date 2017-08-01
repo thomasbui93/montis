@@ -1,0 +1,25 @@
+{
+  "name": "montis",
+  "version": "0.0.1",
+  "description": "Backend for August application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "es6",
+    "express"
+  ],
+  "author": {
+    "name": "Khoa Bui",
+    "email": "thomasbui93@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "node-babel": "^0.1.2"
+  }
+}
