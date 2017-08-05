@@ -1,5 +1,5 @@
-import {Router} from 'express';
-import {index, findOne, createOne, update, remove} from './articleController';
+import { Router } from 'express';
+import { index, findOne, createOne, update, remove } from './articleController';
 
 const router = Router();
 

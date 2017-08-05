@@ -3,6 +3,12 @@ import co from 'co';
 import {getCollectionConfig} from '../../configuration/api/articleHelper';
 import {normalizeResponse} from "../../configuration/api/apiHelper"
 
+/**
+ * List all tags
+ * @param req
+ * @param res
+ * @param next
+ */
 export const index = (req, res, next) => {
   co(function* () {
     let tags = [];
@@ -32,6 +38,12 @@ export const index = (req, res, next) => {
   });
 };
 
+/**
+ * Create the tag
+ * @param req
+ * @param res
+ * @param next
+ */
 export const createOne = (req, res, next) => {
   co(function* () {
     let tag = new Tag(req.body);
@@ -46,6 +58,34 @@ export const createOne = (req, res, next) => {
   })
 };
 
+/**
+ * Get one tag detail
+ * @param req
+ * @param res
+ * @param next
+ */
+export const findOne = (req, res, next) => {
+  co(function* () {
+    let category;
+    const urlKey = req.params.urlKey;
+    let error = null;
+
+    try {
+      category = yield Tag.findOne({url: urlKey, isActive: true});
+    } catch (e) {
+      error = e;
+    }
+
+    res.json(normalizeResponse(category, error));
+  })
+};
+
+/**
+ * Update the tag
+ * @param req
+ * @param res
+ * @param next
+ */
 export const update = (req, res, next) => {
   co(function* () {
     const tagId = req.params.tagId;
@@ -67,7 +107,12 @@ export const update = (req, res, next) => {
   })
 };
 
-
+/**
+ * Remove the tag
+ * @param req
+ * @param res
+ * @param next
+ */
 export const remove = (req, res, next) => {
   co(function* () {
     const tagId = req.params.tagId;

@@ -2,6 +2,7 @@ import mongoose, {Schema} from "mongoose";
 import shortId from "shortid";
 import {DEFAULT_THUMBNAIL} from "../configuration/api/articleHelper"
 import uniqueValidator from "mongoose-unique-validator"
+
 const schema = new Schema({
   title: {
     type: String,

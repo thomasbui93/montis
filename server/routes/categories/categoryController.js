@@ -2,6 +2,12 @@ import Category from "../../models/Category";
 import co from "co";
 import {normalizeResponse} from "../../configuration/api/apiHelper"
 
+/**
+ * List all categories
+ * @param req
+ * @param res
+ * @param next
+ */
 export const index = (req, res, next) => {
   co(function* () {
     let error = null;
@@ -16,6 +22,12 @@ export const index = (req, res, next) => {
   })
 };
 
+/**
+ * Get one category
+ * @param req
+ * @param res
+ * @param next
+ */
 export const findOne = (req, res, next) => {
   co(function* () {
     let category;
@@ -31,6 +43,12 @@ export const findOne = (req, res, next) => {
   })
 };
 
+/**
+ * Create one category
+ * @param req
+ * @param res
+ * @param next
+ */
 export const createOne = (req, res, next) => {
   co(function* () {
     let category = new Category(req.body);
@@ -45,6 +63,12 @@ export const createOne = (req, res, next) => {
   })
 };
 
+/**
+ * Update the category
+ * @param req
+ * @param res
+ * @param next
+ */
 export const update = (req, res, next) => {
   co(function* () {
     const categoryId = req.params.categoryId;
@@ -66,13 +90,15 @@ export const update = (req, res, next) => {
   })
 };
 
-/*
-  Remove category
+/**
+ * Remove the category
+ * @param req
+ * @param res
+ * @param next
  */
 export const remove = (req, res, next) => {
   co(function* () {
     const categoryId = req.params.categoryId;
-
     try {
       yield Category.findByIdAndRemove(categoryId);
     } catch (error) {

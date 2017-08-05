@@ -3,6 +3,12 @@ import co from "co";
 import {getCollectionConfig} from "../../configuration/api/articleHelper";
 import {normalizeResponse} from "../../configuration/api/apiHelper"
 
+/**
+ * List all articles
+ * @param req
+ * @param res
+ * @param next
+ */
 export const index = (req, res, next) => {
   co(function* () {
     let collectionConfig = {};
@@ -30,6 +36,12 @@ export const index = (req, res, next) => {
   })
 };
 
+/**
+ * Get one article detail
+ * @param req
+ * @param res
+ * @param next
+ */
 export const findOne = (req, res, next) => {
   co(function* () {
     let article;
@@ -41,7 +53,6 @@ export const findOne = (req, res, next) => {
       error = e;
     }
 
-
     try {
       article = yield article.populate('tags').execPopulate();
     } catch (e) {
@@ -52,6 +63,12 @@ export const findOne = (req, res, next) => {
   })
 };
 
+/**
+ * Create one article
+ * @param req
+ * @param res
+ * @param next
+ */
 export const createOne = (req, res, next) => {
   co(function* () {
     let article = new Article(req.body);
@@ -66,6 +83,12 @@ export const createOne = (req, res, next) => {
   })
 };
 
+/**
+ * Update one article
+ * @param req
+ * @param res
+ * @param next
+ */
 export const update = (req, res, next) => {
   co(function* () {
     const articleId = req.params.articleId;
@@ -87,7 +110,12 @@ export const update = (req, res, next) => {
   })
 };
 
-
+/**
+ * Remove article
+ * @param req
+ * @param res
+ * @param next
+ */
 export const remove = (req, res, next) => {
   co(function* () {
     const articleId = req.params.articleId;
