@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -6,14 +7,17 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 
 import config from './configuration/config';
+import {restApiError} from "./configuration/api/errorHandler"
 
 const port = normalizePort(process.env.PORT || config.expressPort);
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression({ threshold: 0 }));
+app.use(restApiError);
 
 //database config
+mongoose.Promise = Promise;
 mongoose.connect(config.database.mongodb.defaultUri, config.database.mongodb.options);
 
 //config routes
