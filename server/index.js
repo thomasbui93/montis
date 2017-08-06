@@ -24,6 +24,7 @@ mongoose.connect(config.database.mongodb.defaultUri, config.database.mongodb.opt
 import routes from './routes';
 routes(app);
 //end config routes
+app.use('/upload', express.static('upload'));
 
 app.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {

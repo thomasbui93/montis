@@ -7,7 +7,7 @@ router.get('/', getAll);
 router.get('/:attributeCode', findOne);
 router.post('/', createOne);
 router.put('/:attributeCode', updateOne);
-router.delete('/:attributeCode', removeOne());
+router.delete('/:attributeCode', removeOne);
 router.post('/massRemove', removeAll);
 router.post('/massUpdate', updateAll);
 

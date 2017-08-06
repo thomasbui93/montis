@@ -2,7 +2,7 @@ import Attribute from "../../models/attribute";
 import co from "co";
 import {getCollectionConfig} from "../../configuration/api/articleHelper";
 import {normalizeResponse} from "../../configuration/api/apiHelper"
-
+import configPath from '../../constant/configPath';
 /**
  * Get all attributes
  * @param req
@@ -15,7 +15,7 @@ export const getAll = (req, res, next) => {
     let collectionConfig = {};
 
     try {
-      collectionConfig = yield getCollectionConfig();
+      collectionConfig = yield getCollectionConfig(configPath.attributePagination);
     } catch (error){
       next(error)
     }

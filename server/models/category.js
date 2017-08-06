@@ -58,4 +58,4 @@ class Category {
 
 schema.loadClass(Category);
 
-export default mongoose.model('Category', Category);
+export default mongoose.model('Category', schema);

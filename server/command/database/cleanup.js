@@ -6,7 +6,6 @@ import co from 'co';
 const cleanDatabase = (db, dbNames) => {
   co(function* () {
     let errors = [];
-    let operations = [];
 
     if (dbNames !== '') {
       dbNames = dbNames.split(',').map(element => element.trim());
@@ -19,7 +18,7 @@ const cleanDatabase = (db, dbNames) => {
       let collection = db.collection(dbName);
 
       try {
-        let dropOperation = yield collection.drop();
+        yield collection.drop();
         return Promise.resolve(undefined);
       } catch (exceptionalError) {
         return Promise.resolve(exceptionalError)
@@ -27,7 +26,7 @@ const cleanDatabase = (db, dbNames) => {
     });
 
     try {
-      operations = yield cleanOperations;
+      yield cleanOperations;
     } catch (error){
       errors.push(error);
     }

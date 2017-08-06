@@ -1,7 +1,6 @@
-import Category from "../../models/Category";
+import Category from "../../models/category";
 import co from "co";
 import {normalizeResponse} from "../../configuration/api/apiHelper"
-
 /**
  * List all categories
  * @param req
@@ -11,13 +10,12 @@ import {normalizeResponse} from "../../configuration/api/apiHelper"
 export const index = (req, res, next) => {
   co(function* () {
     let error = null;
-    let categoryCollection
+    let categoryCollection;
     try {
-      categoryCollection = yield Category.find({isActive: true});
+      categoryCollection = yield Category.find();
     } catch (e) {
       error = e;
     }
-
     res.json(normalizeResponse(categoryCollection, error));
   })
 };

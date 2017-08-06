@@ -6,15 +6,16 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  code: {
+  filePath: {
     type: String,
     required: true,
     unique: true
   },
-  value: {
-    type: String
+  size: {
+    type: Number,
+    required: true
   },
-  description: {
+  mimetype: {
     type: String,
     required: true
   },
@@ -28,13 +29,6 @@ const schema = new Schema({
   }
 });
 
-schema.pre('save', function(next) {
-  if(!this.code){
-    this.code = this.name.split(' ').concat('_');
-  }
-  next();
-});
-
 schema.pre('update', function (next) {
   this.updateAt = new Date();
   next();
@@ -42,10 +36,10 @@ schema.pre('update', function (next) {
 
 schema.plugin(uniqueValidator);
 
-class Configuration {
+class Media {
 
 }
 
-schema.loadClass(Configuration);
+schema.loadClass(Media);
 
-export default mongoose.model('Configuration', schema);
+export default mongoose.model('Media', schema);

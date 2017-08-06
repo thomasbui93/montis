@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-import shortId from 'shortid';
 import uniqueValidator from 'mongoose-unique-validator'
 
 const schema = new Schema({
@@ -31,8 +30,10 @@ const schema = new Schema({
 });
 
 schema.pre('save', function(next) {
-  this.code = this.name.split(' ').concat('_');
-  next()
+  if(!this.code){
+    this.code = this.name.split(' ').concat('_');
+  }
+  next();
 });
 
 schema.pre('update', function (next) {

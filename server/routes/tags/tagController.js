@@ -15,7 +15,7 @@ export const index = (req, res, next) => {
     let collectionConfig = {};
 
     try {
-      collectionConfig = yield getCollectionConfig();
+      collectionConfig = yield getCollectionConfig('tag');
     } catch (error){
       next(error)
     }
@@ -25,7 +25,7 @@ export const index = (req, res, next) => {
     const skip = (parseInt(pageNumber)-1) * parseInt(pageSize);
 
     try {
-      tags = yield Tag.find({ isActive: false })
+      tags = yield Tag.find({ isActive: true })
         .sort({createAt: -1})
         .limit(pageSize)
         .skip(skip)

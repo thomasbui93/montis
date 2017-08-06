@@ -14,7 +14,30 @@ export default {
   },
   command: {
     database: {
-      collections: ['articles','tags','categories']
+      collections: ['articles','tags','categories', 'configurations']
     }
+  },
+  bootstrapConfigurations: {
+    data: [{
+      code: 'articlePagination',
+      name: 'Article Pagination',
+      description: 'Default number of document in a page',
+      value: 10
+    }, {
+      code: 'categoryPagination',
+      name: 'Category Pagination',
+      description: 'Default number of category in a page',
+      value: 10
+    }, {
+      code: 'attributePagination',
+      name: 'Attribute Pagination',
+      description: 'Default number of attribute in a page',
+      value: 10
+    }, {
+      code: 'tagPagination',
+      name: 'Tag Pagination',
+      description: 'Default number of tag in a page',
+      value: 10
+    }]
   }
 };

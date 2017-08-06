@@ -1,6 +1,6 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import shortId from "shortid";
-import {DEFAULT_THUMBNAIL} from "../configuration/api/articleHelper"
+import {DEFAULT_THUMBNAIL, populateDefaultAttribute} from "../configuration/api/articleHelper"
 import uniqueValidator from "mongoose-unique-validator"
 
 const schema = new Schema({
@@ -47,17 +47,33 @@ const schema = new Schema({
   versionControl: {
     type: Array,
     default: []
+  },
+  additionalData: {
+    type: Object
   }
 });
 
 schema.pre('save', function(next) {
   this.url = `${this.title.trim().split(' ').concat('-')}-${shortId.generate()}`;
-  next();
+
+  if(this.categories.length > 0 && this.tags.length > 0) next();
+
+  populateDefaultAttribute(this)
+    .then(function (errors) {
+      errors.length === 0 ? next() : next(errors);
+    }).catch(error => next(error));
 });
 
 schema.pre('update', function (next) {
   this.updateAt = new Date();
-  next();
+
+  if(this.categories.length > 0 && this.tags.length > 0) next();
+
+  populateDefaultAttribute(this)
+    .then(function (errors) {
+      errors.length === 0 ? next() : next(errors);
+    }).catch(error => next(error));
+
 });
 
 schema.plugin(uniqueValidator);
